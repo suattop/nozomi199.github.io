@@ -143,7 +143,7 @@ function calc(){
 	} 
 	gblDate = new Date(
 		parseInt(document.querySelector("input[name=txtYear]").value),
-		parseInt(document.querySelector("select[name=cboMonth]").value),
+		parseInt(document.querySelector("select[name=cboMonth]").value)-1,
 		parseInt(document.querySelector("select[name=cboDay]").value),
 		parseInt(document.querySelector("select[name=cboHour]").value),
 		parseInt(document.querySelector("select[name=cboMinute]").value),
