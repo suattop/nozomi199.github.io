@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="dqm.css" >
 <script>
 function updateSite(event) {
-	window.applicationCache.swapCache();
+	window.applicationCache.swapCache() ;
 }
 window.applicationCache.addEventListener('updateready',updateSite,false);
 </script>
@@ -189,7 +189,7 @@ function calc2() {
 		var idx = "0123456789123456789123456789123456789".substr(qimenInfo.kook+4,10);
 		//console.log(idx, idx.length)
 		var gz  = jiqi.bazi.substr(6,2);
-		var hmon = "662792448318".substr(parseInt(gzid/10),2);
+		var hmon = "662792448318".substr(parseInt(gzid/10)*2,2);
 		var god = {'符':'值符',
 		'蛇':'螣蛇',
 		'陰':'太陰',
