@@ -1,0 +1,247 @@
+<html lang='zh-tw'>
+<head>
+<title>大奇門遁甲</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=0.65">
+<link rel="stylesheet" type="text/css" href="pure-min.0.6.0.css" >
+<link rel="stylesheet" type="text/css" href="dqm.css" >
+<!-- include require script lib -->
+<script src="js/string.js"></script>
+<script src="js/jiqi.js"></script>
+<script src="js/bazi.js"></script>
+<script src="js/lunar.js"></script>
+<script src="js/qimen_min.js"></script>
+</head>
+<body>
+	<div id="menu">
+		<div class="pure-g" >
+            <div class="pure-u-1-8" ><input type="number" name="txtYear" style='border:1' placeholder='yyyy' class='pure-u-1'/></div>
+            <div class="pure-u-1-8" >
+              <select name="cboMonth" class="pure-input-1">
+              <script>
+                for(var i = 1; i < 13; i++)
+                  document.write('<option value="{0}">{0}月</option>'.format(i));
+              </script>
+              </select>
+            </div>
+            <div class="pure-u-1-8" >
+              <select name="cboDay">
+              <script>
+                for(var i = 1; i < 32; i++)
+                  document.write('<option value="{0}">{0}日</option>'.format(i));
+              </script>
+              </select>
+            </div>
+            <div class="pure-u-1-8" >
+              <select name="cboHour">
+              <script>
+                for(var i = 0; i < 24; i++)
+                  document.write('<option value="{0}">{0}時</option>'.format(i));
+              </script>
+              </select>
+            </div>
+            <div class="pure-u-1-8" >
+              <select name="cboMinute">
+              <script>
+                for(var i = 0; i < 60; i++)
+                  document.write('<option value="{0}">{0}分</option>'.format(i));
+              </script>
+              </select>
+            </div>
+            <div class="pure-u-1-8" >
+              <select name="cboSecond">
+              <script>
+                for(var i = 0; i < 60; i++)
+                  document.write('<option value="{0}">{0}秒</option>'.format(i));
+              </script>
+              </select>
+            </div>
+			<div class="pure-u-1-8" ><input type="number" name="txtMSec" style='border:1' placeholder='yyyy' class='pure-input-1'/></div>
+            <div class="pure-u-1-8" ><input class="pure-button pure-input-1" type="button" value="計算" onclick="calc()" /></div>
+          </div>
+	</div>
+	<div class="hr"></div>
+	<div id="info">
+		<div><span id="lblDate"></span></div>
+		<div><span id="lblDateLunar"></span></div>
+		<div><span id="lblBazi"></span></div>
+		<div><span id="lblJiqi"></span><span id="lblYuen"></span>元<span style="visibility:hidden">，</span><span id="lblDun"></span>遁<span id="lblKok"></span>局</div>
+		<div>值符天<span id="lblFu"></span><span style="visibility:hidden">，</span>值使<span id="lblShi"></span>門</div>
+	</div>
+	<div id="mainTable" class="table">
+		<div class="tr">
+			<div class="td" id="p4"></div>
+			<div class="td" id="p9"></div>
+			<div class="td" id="p2"></div>
+		</div>
+		<div class="tr">
+			<div class="td" id="p3"></div>
+			<div class="td" id="p5"></div>
+			<div class="td" id="p7"></div>
+		</div>
+		<div class="tr">
+			<div class="td" id="p8"></div>
+			<div class="td" id="p1"></div>
+			<div class="td" id="p6"></div>
+		</div>
+	</div>
+	<div id="tplTable" class="table" style="display:none">
+		<div class="tr">
+			<div class="td" id="i4">4</div>
+			<div class="td" id="i9">9</div>
+			<div class="td" id="i2">2</div>
+		</div>
+		<div class="tr">
+			<div class="td" id="i3">3</div>
+			<div class="td" id="i5">5</div>
+			<div class="td" id="i7">7</div>
+		</div>
+		<div class="tr">
+			<div class="td" id="i8">8</div>
+			<div class="td" id="i1">1</div>
+			<div class="td" id="i6">6</div>
+		</div>
+	</div>
+	<div class="hr"></div>
+	<!-- credits -->
+	<div id="credits">
+		<p>大奇門遁甲青龍大殿 2017年版</p>
+	</div>
+</body>
+<script>
+"use strict";
+var gblDate = new Date();
+var jiqi = QIMEN_STAR.jiqi.GetJiqiInfo(
+	gblDate.getFullYear(),
+	gblDate.getMonth()+1,
+	gblDate.getDate(),
+	gblDate.getHours(),
+	gblDate.getMinutes(),
+	gblDate.getSeconds(),
+	gblDate.getMilliseconds()
+);
+var qimenInfo = QIMEN_STAR.calc_kok(jiqi);
+var qimenPan  = QIMEN_STAR.qimenCalc(qimenInfo.dun,qimenInfo.kook,jiqi.bazi.substr(6,2));
+var gzid = QIMEN_STAR.bazi.gz2idx(jiqi.bazi.substr(6,2));
+function calc(){
+	var a = parseInt(document.querySelector("input[name=txtYear]").value);
+	var b = parseInt(document.querySelector("input[name=txtMSec]").value);
+	if(a < 1) {
+		alert('請輸入正確年份(大於0)');
+		return;
+	}
+	if(b < 0|b>999) {
+		alert('請輸入正確毫秒(大於-1小於1000)');
+		return;
+	} 
+	gblDate = new Date(
+		parseInt(document.querySelector("input[name=txtYear]").value),
+		parseInt(document.querySelector("select[name=cboMonth]").value),
+		parseInt(document.querySelector("select[name=cboDay]").value),
+		parseInt(document.querySelector("select[name=cboHour]").value),
+		parseInt(document.querySelector("select[name=cboMinute]").value),
+		parseInt(document.querySelector("select[name=cboSecond]").value),
+		parseInt(document.querySelector("input[name=txtMSec]").value)
+	);
+	jiqi = QIMEN_STAR.jiqi.GetJiqiInfo(
+		gblDate.getFullYear(),
+		gblDate.getMonth()+1,
+		gblDate.getDate(),
+		gblDate.getHours(),
+		gblDate.getMinutes(),
+		gblDate.getSeconds(),
+		gblDate.getMilliseconds()
+	);
+	qimenInfo = QIMEN_STAR.calc_kok(jiqi);
+	qimenPan  = QIMEN_STAR.qimenCalc(qimenInfo.dun,qimenInfo.kook,jiqi.bazi.substr(6,2));
+	gzid = QIMEN_STAR.bazi.gz2idx(jiqi.bazi.substr(6,2));
+	//
+	calc2();
+}
+function calc2() {
+	document.querySelector("#lblDateLunar").innerText = QIMEN_STAR.Solar2Lunar(gblDate.getFullYear(),gblDate.getMonth()+1,gblDate.getDate());
+	document.querySelector("#lblDate").innerText = QIMEN_STAR.jiqi.JTime(jiqi.julian)+"."+gblDate.getMilliseconds();
+	(function(){
+		var d = ['年','月','日','時','分','秒','毫秒','無極','混元','究境'];
+		var bz = jiqi.bazi;
+		d.forEach(function(v,k) {
+			d[k] = bz.substr(k*2,2)+d[k];
+		});
+		document.querySelector('#lblBazi').innerHTML = d.join('<span style="visibility:hidden">，</span>');
+	})();
+	(function() {
+		var q = qimenInfo;
+		document.querySelector('#lblJiqi').innerText = q.jiqi;
+		document.querySelector('#lblYuen').innerText = q.yuen;
+		document.querySelector('#lblDun').innerText = "陰陽"[q.dun];
+		document.querySelector('#lblKok').innerText = "零一二三四五六七八九"[q.kook];
+		document.querySelector('#lblFu').innerText = qimenPan.info.符;
+		document.querySelector('#lblShi').innerText = qimenPan.info.使;
+	})();
+	(function() {
+		var idx = "0123456789123456789123456789123456789".substr(qimenInfo.kook+4,10);
+		//console.log(idx, idx.length)
+		var gz  = jiqi.bazi.substr(6,2);
+		var hmon = "662792448318".substr(parseInt(gzid/10),2);
+		var god = {'符':'值符',
+		'蛇':'螣蛇',
+		'陰':'太陰',
+		'合':'六合',
+		'白':'白虎',
+		'玄':'玄武',
+		'地':'九地',
+		'天':'九天'};
+		for(var i = 1; i < 10; i++) {
+			var kok  = idx[i];
+			var qpan = QIMEN_STAR.qimenCalc(qimenInfo.dun,kok,gz);
+			var pan  = document.querySelector("#p"+i);
+			var dei  = qpan['地'][5];
+			for(var j = 1; j < 10; j++) {
+				var dei  = '，';
+				var hung  = '，';
+				var godd  = "，，，，\n";
+				var door  = "，，，，\n";
+				var star  = "，，，{0}".format(qpan['地'][j]);
+				if(hmon[0] == j || hmon[1] == j) hung = 'Ｏ';
+				if(qpan['星'][j] == '苪') dei = qpan['地'][5];
+				if(j != 5) {
+					godd = "{1}{0}，\n".format(god[qpan['神'][j]], hung);
+					door = "{2}{0}門{1}\n".format(qpan['門'][j],qpan['天'][j],dei);
+					star = "，天{0}{1}".format(qpan['星'][j],qpan['地'][j]);
+				}
+				pan.querySelector("#i"+j).innerHTML = 
+				(godd+
+				door+
+				star).replaceAll("\n","<br />").replaceAll("，",'<span style="visibility:hidden">，</span>');
+			}
+		}
+	})();
+}
+document.addEventListener("DOMContentLoaded",function() {
+	(function() {
+		document.querySelector("input[name=txtYear]").value = gblDate.getFullYear();
+		document.querySelector("select[name=cboMonth]").value = gblDate.getMonth()+1;
+		document.querySelector("select[name=cboDay]").value = gblDate.getDate();
+		document.querySelector("select[name=cboHour]").value = gblDate.getHours();
+		document.querySelector("select[name=cboMinute]").value = gblDate.getMinutes();
+		document.querySelector("select[name=cboSecond]").value = gblDate.getSeconds();
+		document.querySelector("input[name=txtMSec]").value = gblDate.getMilliseconds();
+	})();
+	
+	(function() {
+		var tpl = document.querySelector("#tplTable").cloneNode(true);
+		tpl.style.display = "";
+		tpl.querySelectorAll(".td").forEach(function(v,k) {
+			v.style.textAlign = "center";
+			v.style.border = "1px dotted #999"
+			v.style.overflow = "hidden";
+		});
+		document.querySelectorAll("#mainTable .td").forEach(function(v,k){
+			v.appendChild(tpl.cloneNode(true));
+			v.style.border = "1px solid #999";
+		});
+	})();
+	calc2();
+});
+</script>
+</html>

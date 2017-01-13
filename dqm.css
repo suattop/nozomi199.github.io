@@ -1,0 +1,43 @@
+body{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	margin-left: 1mm;
+	margin-right: 1mm;
+	margin-top: 1mm;
+	font-size:4mm;
+}
+div.table {
+	display: table; min-width:100%;
+}
+div.table > div.tr {
+	display: table-row;
+}
+div.table > div.tr > div.td {
+	display: table-cell;
+}
+hr, div.hr {
+	min-height:2mm;
+	overflow: hidden;
+	clear: both;
+}
+div#menu {
+	height: auto;
+	overflow-y:hidden;
+	clear:both;
+}
+div#mainTable,div#info {
+	font-size: 8px;
+}
+input, select {
+	width:100%;
+	min-height: 12mm;
+	font-size:4mm;
+	padding-left: 1mm;
+}
+div#credits > p {
+	text-align:center;
+}
