@@ -43,7 +43,7 @@ div#credits > p {
 	text-align:center;
 }
 
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 700px) {
 	div#menu, div#mainTable, div#info,div#credits {
 		width: 700px;
 		font-size: 18px;
