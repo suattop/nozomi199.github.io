@@ -1,5 +1,6 @@
 CACHE MANIFEST
-#2017-01-13 v.0.1.5
+#2017-01-17 v.0.1.6
+# remove dqm.zip and bind the download to github master
 index.html
 dqm.css
 pure-min.0.6.0.css
