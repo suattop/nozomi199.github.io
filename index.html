@@ -241,12 +241,14 @@ document.addEventListener("DOMContentLoaded",function() {
 	(function() {
 		var tpl = document.querySelector("#tplTable").cloneNode(true);
 		tpl.style.display = "";
-		tpl.querySelectorAll(".td").forEach(function(v,k) {
+		var tmp = tpl.querySelectorAll(".td");
+		[].forEach.call(tmp,function(v,k) {
 			v.style.textAlign = "center";
 			v.style.border = "1px dotted #999"
 			v.style.overflow = "hidden";
 		});
-		document.querySelectorAll("#mainTable .td").forEach(function(v,k){
+		var tmp = document.querySelectorAll("#mainTable .td");
+		[].forEach.call(tmp,function(v,k){
 			v.appendChild(tpl.cloneNode(true));
 			v.style.border = "1px solid #999";
 		});
