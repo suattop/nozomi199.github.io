@@ -131,7 +131,7 @@ if(qs.indexOf('?')) {
 		// If evenly divisible by 4 and not evenly divisible by 100,
 		// or is evenly divisible by 400, then a leap year
 		var y = (id.substr(0,4))*1;
-		var m = (id.substr(4,2))*1;
+		var m = (id.substr(4,2))*1 - 1;
 		var d = (id.substr(6,2))*1;
 		var h = (id.substr(9,2))*1;
 		var i = (id.substr(11,2))*1;
@@ -142,7 +142,7 @@ if(qs.indexOf('?')) {
 		// If evenly divisible by 4 and not evenly divisible by 100,
 		// or is evenly divisible by 400, then a leap year
 		var y = (id.substr(0,4))*1;
-		var m = (id.substr(4,2))*1;
+		var m = (id.substr(4,2))*1 - 1;
 		var d = (id.substr(6,2))*1;
 		var h = (id.substr(9,2))*1;
 		var i = (id.substr(11,2))*1;
