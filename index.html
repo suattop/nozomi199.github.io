@@ -137,7 +137,7 @@ if(qs.indexOf('?')) {
 		var i = (id.substr(11,2))*1;
 		var s = (id.substr(13,2))*1;
 		var ms = 0;
-		\gblDate = new Date(y,m,d,h,i,s,ms);
+		gblDate = new Date(y,m,d,h,i,s,ms);
 	} else if(id.match(patt2)) {
 		// If evenly divisible by 4 and not evenly divisible by 100,
 		// or is evenly divisible by 400, then a leap year
