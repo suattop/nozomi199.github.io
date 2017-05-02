@@ -1,4 +1,6 @@
 CACHE MANIFEST
+#2017-05-02 v.0.1.8
+# add query string function for external linkin
 #2017-02-10 v.0.1.7
 # fix ios/safari dom.querySelectorAll().forEach problem
 #2017-01-17 v.0.1.6
