@@ -121,6 +121,36 @@ window.applicationCache.addEventListener('updateready',updateSite,false);
 <script>
 "use strict";
 var gblDate = new Date();
+var qs = window.location.href;
+if(qs.indexOf('?')) {
+	var id = qs.substr(qs.indexOf('?')+1);
+	var patt1=/^[0-9]{4}[0-9]{2}[0-9]{2}-[0-9]{2}[0-9]{2}[0-9]{2}$/i;
+	var patt2=/^[0-9]{4}[0-9]{2}[0-9]{2}-[0-9]{2}[0-9]{2}[0-9]{2}.[0-9]{3}$/i;
+	var daysInMonth = [0,31,28,31,30,31,30,31,31,30,31,30,31];
+	if(id.match(patt1)) {
+		// If evenly divisible by 4 and not evenly divisible by 100,
+		// or is evenly divisible by 400, then a leap year
+		var y = (id.substr(0,4))*1;
+		var m = (id.substr(4,2))*1;
+		var d = (id.substr(6,2))*1;
+		var h = (id.substr(9,2))*1;
+		var i = (id.substr(11,2))*1;
+		var s = (id.substr(13,2))*1;
+		var ms = 0;
+		\gblDate = new Date(y,m,d,h,i,s,ms);
+	} else if(id.match(patt2)) {
+		// If evenly divisible by 4 and not evenly divisible by 100,
+		// or is evenly divisible by 400, then a leap year
+		var y = (id.substr(0,4))*1;
+		var m = (id.substr(4,2))*1;
+		var d = (id.substr(6,2))*1;
+		var h = (id.substr(9,2))*1;
+		var i = (id.substr(11,2))*1;
+		var s = (id.substr(13,2))*1;
+		var ms = (id.substr(16,3))*1;
+		gblDate = new Date(y,m,d,h,i,s,ms);
+	}
+}
 var jiqi = QIMEN_STAR.jiqi.GetJiqiInfo(
 	gblDate.getFullYear(),
 	gblDate.getMonth()+1,
