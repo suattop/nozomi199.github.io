@@ -220,6 +220,7 @@ function calc2() {
 	})();
 	(function() {
 		var idx = "0123456789123456789123456789123456789".substr(qimenInfo.kook+4,10);
+		if(q.dun == 0) idx = idx.split("").reverse().join("");
 		//console.log(idx, idx.length)
 		var gz  = jiqi.bazi.substr(6,2);
 		var hmon = "662792448318".substr(parseInt(gzid/10)*2,2);
