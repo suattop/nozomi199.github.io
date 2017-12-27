@@ -1,4 +1,9 @@
 CACHE MANIFEST
+#2017-12-27 v.0.1.13
+# fix calander input problem
+# after dot presentation:
+# 1 is presented to 1, not 100
+# 12 is presented to 12, not 120
 #2017-12-19 v.0.1.12
 # fix kook calculation of ching ming
 # rewind size in mobile setting
